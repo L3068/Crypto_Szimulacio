@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Crypto_Simulation.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29903c7a1622078abcb2fdf8d4f79fc2fb868704")]
 [assembly: System.Reflection.AssemblyProductAttribute("Crypto_Simulation.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Crypto_Simulation.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,4 @@
-use CrypoDb_FKMMEF
+use CrypoDb
 
 SET IDENTITY_INSERT CryptoCurrencies ON;
 INSERT INTO CryptoCurrencies (Id, Name, Symbol, CurrentPrice, TotalSupply) VALUES

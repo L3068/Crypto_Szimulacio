@@ -5,7 +5,6 @@ using Crypto_Simulation.Controllers;
 using System.Text;
 using System;
 using Crypto_Simulation.Services;
-using Crypto_Simulation.DataContext;
 
 var builder = WebApplication.CreateBuilder(args);
 

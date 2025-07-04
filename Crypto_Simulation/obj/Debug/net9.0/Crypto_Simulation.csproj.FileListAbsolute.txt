@@ -173,3 +173,5 @@ C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0
 C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0\Crypto_Simulation.pdb
 C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0\Crypto_Simulation.genruntimeconfig.cache
 C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0\ref\Crypto_Simulation.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0\Crypto_Simulation.sourcelink.json
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation\obj\Debug\net9.0\Crypto_Simulation.MvcApplicationPartsAssemblyInfo.cs
