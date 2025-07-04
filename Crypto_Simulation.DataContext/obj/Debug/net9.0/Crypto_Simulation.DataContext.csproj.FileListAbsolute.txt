@@ -1,0 +1,14 @@
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\bin\Debug\net9.0\Crypto_Simulation.DataContext.deps.json
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\bin\Debug\net9.0\Crypto_Simulation.DataContext.runtimeconfig.json
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\bin\Debug\net9.0\Crypto_Simulation.DataContext.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\bin\Debug\net9.0\Crypto_Simulation.DataContext.pdb
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.csproj.AssemblyReference.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.AssemblyInfoInputs.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.AssemblyInfo.cs
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.csproj.CoreCompileInputs.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\refint\Crypto_Simulation.DataContext.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.pdb
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\Crypto_Simulation.DataContext.genruntimeconfig.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.DataContext\obj\Debug\net9.0\ref\Crypto_Simulation.DataContext.dll

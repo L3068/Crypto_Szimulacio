@@ -1,0 +1,17 @@
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.Services.deps.json
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.Services.runtimeconfig.json
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.Services.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.Services.pdb
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.DataContext.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\bin\Debug\net9.0\Crypto_Simulation.DataContext.pdb
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.csproj.AssemblyReference.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.AssemblyInfoInputs.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.AssemblyInfo.cs
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.csproj.CoreCompileInputs.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_S.74D74782.Up2Date
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\refint\Crypto_Simulation.Services.dll
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.pdb
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\Crypto_Simulation.Services.genruntimeconfig.cache
+C:\Users\retki\source\repos\Crypto_Simulation\Crypto_Simulation.Services\obj\Debug\net9.0\ref\Crypto_Simulation.Services.dll

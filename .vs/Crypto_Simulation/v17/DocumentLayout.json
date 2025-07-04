@@ -1,0 +1,530 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\migrations\\20250704163523_original.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\migrations\\20250704163523_original.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\crypto_simulation.datacontext.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\crypto_simulation.datacontext.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\cryptocurrency.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\cryptocurrency.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\transactionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\walletservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\walletservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\profitdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\profitdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\tradeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\tradeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\profitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\profitservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\cryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\cryptoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\priceupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\priceupdateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\profitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\profitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\cryptoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\cryptoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\walletcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\walletcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\portfolioitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\portfolioitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\cryptodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\cryptodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.services\\crypto_simulation.services.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EB99763E-C831-4BDE-AA5B-990510CCE2FD}|Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj|solutionrelative:crypto_simulation.services\\crypto_simulation.services.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation\\controllers\\tradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7BA2F1D-3194-410F-9D44-9236916FF113}|Crypto_Simulation\\Crypto_Simulation.csproj|solutionrelative:crypto_simulation\\controllers\\tradecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\walletdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\walletdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\wallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\entities\\pricehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\entities\\pricehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\transactiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\transactiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|c:\\users\\retki\\source\\repos\\crypto_simulation\\crypto_simulation.datacontext\\dtos\\tradedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AFACC01-4AB1-43BC-A9DC-5FEC6D072B31}|Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj|solutionrelative:crypto_simulation.datacontext\\dtos\\tradedtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20250704163523_original.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Migrations\\20250704163523_original.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Migrations\\20250704163523_original.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Migrations\\20250704163523_original.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Migrations\\20250704163523_original.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T16:35:23.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Crypto_Simulation.DataContext",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-04T16:25:43.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Context\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:10:16.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WalletService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\WalletService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\WalletService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\WalletService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\WalletService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:13:37.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransactionsController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\TransactionsController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\TransactionsController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\TransactionsController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\TransactionsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:16:13.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CryptoCurrency.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\CryptoCurrency.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\CryptoCurrency.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\CryptoCurrency.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\CryptoCurrency.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:44.422Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProfitDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\ProfitDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\ProfitDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\ProfitDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\ProfitDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:20.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Program.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Program.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Program.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:00:41.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\UserService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:13:28.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\TransactionService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\TransactionService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\TransactionService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\TransactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:13:21.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TradeService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\TradeService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\TradeService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\TradeService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\TradeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:13:09.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProfitService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\ProfitService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\ProfitService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\ProfitService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\ProfitService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:59.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CryptoService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\CryptoService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\CryptoService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\CryptoService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\CryptoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:09:12.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PriceUpdateService.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\PriceUpdateService.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\PriceUpdateService.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\PriceUpdateService.cs",
+              "RelativeToolTip": "Crypto_Simulation.Services\\PriceUpdateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:40.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProfitController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\ProfitController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\ProfitController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\ProfitController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\ProfitController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:16:05.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CryptosController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\CryptosController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\CryptosController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\CryptosController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\CryptosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:02:27.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIAwwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:16:33.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "WalletController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\WalletController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\WalletController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\WalletController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\WalletController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:16:38.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CryptoDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\CryptoDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\CryptoDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\CryptoDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\CryptoDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:09.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Crypto_Simulation.Services",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
+              "RelativeDocumentMoniker": "Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
+              "RelativeToolTip": "Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-04T15:21:10.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PortfolioItem.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\PortfolioItem.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\PortfolioItem.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\PortfolioItem.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\PortfolioItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:49.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TradeController.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\TradeController.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation\\Controllers\\TradeController.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation\\Controllers\\TradeController.cs",
+              "RelativeToolTip": "Crypto_Simulation\\Controllers\\TradeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:05:59.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UserDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\UserDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\UserDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\UserDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\UserDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:39.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "WalletDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\WalletDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\WalletDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\WalletDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\WalletDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:35.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\User.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:12.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Wallet.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\Wallet.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\Wallet.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\Wallet.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\Wallet.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wAMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:16.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\Transaction.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\Transaction.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\Transaction.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\Transaction.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:05.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "PriceHistory.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\PriceHistory.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Entities\\PriceHistory.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Entities\\PriceHistory.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Entities\\PriceHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:12:01.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "TransactionDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\TransactionDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\TransactionDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\TransactionDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\TransactionDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:30.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "TradeDtos.cs",
+              "DocumentMoniker": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\TradeDtos.cs",
+              "RelativeDocumentMoniker": "Crypto_Simulation.DataContext\\Dtos\\TradeDtos.cs",
+              "ToolTip": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Dtos\\TradeDtos.cs",
+              "RelativeToolTip": "Crypto_Simulation.DataContext\\Dtos\\TradeDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T15:11:25.863Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
