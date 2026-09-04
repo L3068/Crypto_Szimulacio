@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj": {}
+    "/home/user/Crypto_Szimulacio/Crypto_Simulation.Services/Crypto_Simulation.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj": {
+    "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/Crypto_Simulation.DataContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
+        "projectUniqueName": "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/Crypto_Simulation.DataContext.csproj",
         "projectName": "Crypto_Simulation.DataContext",
-        "projectPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj",
-        "packagesPath": "C:\\Users\\retki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\obj\\",
+        "projectPath": "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/Crypto_Simulation.DataContext.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\retki\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,13 +39,23 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[9.0.6, )"
             },
@@ -63,18 +68,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.6, )"
-            },
-            "Swashbuckle.AspNetCore.Swagger": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerGen": {
-              "target": "Package",
-              "version": "[9.0.1, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerUI": {
-              "target": "Package",
-              "version": "[9.0.1, )"
             }
           },
           "imports": [
@@ -88,45 +81,50 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.19, 9.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.19, 9.0.19]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.111/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj": {
+    "/home/user/Crypto_Szimulacio/Crypto_Simulation.Services/Crypto_Simulation.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
+        "projectUniqueName": "/home/user/Crypto_Szimulacio/Crypto_Simulation.Services/Crypto_Simulation.Services.csproj",
         "projectName": "Crypto_Simulation.Services",
-        "projectPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\Crypto_Simulation.Services.csproj",
-        "packagesPath": "C:\\Users\\retki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.Services\\obj\\",
+        "projectPath": "/home/user/Crypto_Szimulacio/Crypto_Simulation.Services/Crypto_Simulation.Services.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/home/user/Crypto_Szimulacio/Crypto_Simulation.Services/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\retki\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj": {
-                "projectPath": "C:\\Users\\retki\\source\\repos\\Crypto_Simulation\\Crypto_Simulation.DataContext\\Crypto_Simulation.DataContext.csproj"
+              "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/Crypto_Simulation.DataContext.csproj": {
+                "projectPath": "/home/user/Crypto_Szimulacio/Crypto_Simulation.DataContext/Crypto_Simulation.DataContext.csproj"
               }
             }
           }
@@ -141,7 +139,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -151,13 +149,7 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[9.0.6, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[9.0.6, )"
             },
@@ -165,17 +157,17 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
-            "Swashbuckle.AspNetCore.Swagger": {
+            "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.6, )"
             },
-            "Swashbuckle.AspNetCore.SwaggerGen": {
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.6, )"
             },
-            "Swashbuckle.AspNetCore.SwaggerUI": {
+            "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[8.14.0, )"
             }
           },
           "imports": [
@@ -189,12 +181,22 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.19, 9.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.19, 9.0.19]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.111/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
