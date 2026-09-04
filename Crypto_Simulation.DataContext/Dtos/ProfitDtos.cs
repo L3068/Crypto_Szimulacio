@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Crypto_Simulation.DataContext.Dtos
 {
     public class ProfitResponseDto
@@ -18,7 +12,7 @@ namespace Crypto_Simulation.DataContext.Dtos
     public class ProfitDetailResponseDto
     {
         public int UserId { get; set; }
-        public List<CryptoProfitDto> Details { get; set; } = new List<CryptoProfitDto>();
+        public List<CryptoProfitDto> Details { get; set; } = new();
         public decimal TotalProfitLoss { get; set; }
     }
 

@@ -1,14 +1,18 @@
-﻿using Crypto_Simulation.DataContext.Dtos;
+using Crypto_Simulation.DataContext.Dtos;
 using Crypto_Simulation.DataContext.Entities;
+using Crypto_Simulation.Infrastructure;
 using Crypto_Simulation.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Crypto_Simulation.Controllers
 {
+    /// <summary>
+    /// Market data. Reads are public; changing the traded instruments is an admin operation.
+    /// </summary>
     [Route("api/[controller]")]
-    [ApiController]
-    public class CryptosController : ControllerBase
+    [Authorize]
+    public class CryptosController : ApiControllerBase
     {
         private readonly ICryptoService _cryptoService;
 
@@ -17,81 +21,72 @@ namespace Crypto_Simulation.Controllers
             _cryptoService = cryptoService;
         }
 
+        /// <summary>Lists every tradable cryptocurrency with its current price.</summary>
         [HttpGet]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<CryptoResponseDto>>> GetAllCryptos()
         {
-            var cryptos = await _cryptoService.GetAllCryptosAsync();
-            return Ok(cryptos);
+            return Ok(await _cryptoService.GetAllCryptosAsync());
         }
 
-        [HttpGet("{cryptoId}")]
+        /// <summary>Returns a single cryptocurrency.</summary>
+        [HttpGet("{cryptoId:int}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CryptoResponseDto>> GetCrypto(int cryptoId)
         {
-            try
-            {
-                var crypto = await _cryptoService.GetCryptoByIdAsync(cryptoId);
-                return Ok(crypto);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(await _cryptoService.GetCryptoByIdAsync(cryptoId));
         }
 
+        /// <summary>Recorded prices, newest first internally but returned oldest-first for charting.</summary>
+        [HttpGet("price/history/{cryptoId:int}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<List<PriceHistoryDto>>> GetPriceHistory(
+            int cryptoId, [FromQuery] PriceHistoryQueryDto query)
+        {
+            return Ok(await _cryptoService.GetPriceHistoryAsync(cryptoId, query));
+        }
+
+        /// <summary>Adds a new tradable cryptocurrency. Admin only.</summary>
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<ActionResult<CryptoResponseDto>> CreateCrypto(CryptoCreateDto cryptoDto)
         {
-            try
-            {
-                var result = await _cryptoService.CreateCryptoAsync(cryptoDto);
-                return CreatedAtAction(nameof(GetCrypto), new { cryptoId = result.CryptoId }, result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = await _cryptoService.CreateCryptoAsync(cryptoDto);
+            return CreatedAtAction(nameof(GetCrypto), new { cryptoId = result.CryptoId }, result);
         }
 
-        [HttpDelete("{cryptoId}")]
-        public async Task<ActionResult> DeleteCrypto(int cryptoId)
-        {
-            try
-            {
-                await _cryptoService.DeleteCryptoAsync(cryptoId);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-
+        /// <summary>Sets a price manually and records it in the history. Admin only.</summary>
         [HttpPut("price")]
+        [Authorize(Roles = UserRoles.Admin)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<CryptoResponseDto>> UpdatePrice(CryptoPriceUpdateDto priceUpdateDto)
         {
-            try
-            {
-                var result = await _cryptoService.UpdateCryptoPriceAsync(priceUpdateDto);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _cryptoService.UpdateCryptoPriceAsync(priceUpdateDto));
         }
 
-        [HttpGet("price/history/{cryptoId}")]
-        public async Task<ActionResult<List<PriceHistory>>> GetPriceHistory(int cryptoId)
+        /// <summary>
+        /// Removes a cryptocurrency. Refused while anyone still holds it or has traded it,
+        /// so deleting cannot silently wipe portfolios. Admin only.
+        /// </summary>
+        [HttpDelete("{cryptoId:int}")]
+        [Authorize(Roles = UserRoles.Admin)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult> DeleteCrypto(int cryptoId)
         {
-            try
-            {
-                var history = await _cryptoService.GetPriceHistoryAsync(cryptoId);
-                return Ok(history);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _cryptoService.DeleteCryptoAsync(cryptoId);
+            return NoContent();
         }
     }
 }

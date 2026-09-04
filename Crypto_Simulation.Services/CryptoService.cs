@@ -1,12 +1,8 @@
-﻿using Crypto_Simulation.DataContext;
+using Crypto_Simulation.DataContext;
 using Crypto_Simulation.DataContext.Dtos;
 using Crypto_Simulation.DataContext.Entities;
+using Crypto_Simulation.DataContext.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crypto_Simulation.Services
 {
@@ -17,7 +13,7 @@ namespace Crypto_Simulation.Services
         Task<CryptoResponseDto> CreateCryptoAsync(CryptoCreateDto cryptoDto);
         Task DeleteCryptoAsync(int cryptoId);
         Task<CryptoResponseDto> UpdateCryptoPriceAsync(CryptoPriceUpdateDto priceUpdateDto);
-        Task<List<PriceHistory>> GetPriceHistoryAsync(int cryptoId);
+        Task<List<PriceHistoryDto>> GetPriceHistoryAsync(int cryptoId, PriceHistoryQueryDto query);
     }
 
     public class CryptoService : ICryptoService
@@ -29,66 +25,79 @@ namespace Crypto_Simulation.Services
             _context = context;
         }
 
-        public async Task<List<CryptoResponseDto>> GetAllCryptosAsync()
-        {
-            var cryptos = await _context.CryptoCurrencies.ToListAsync();
-            return cryptos.Select(c => new CryptoResponseDto
-            {
-                CryptoId = c.Id,
-                Name = c.Name,
-                Symbol = c.Symbol,
-                CurrentPrice = c.CurrentPrice,
-                TotalSupply = c.TotalSupply
-            }).ToList();
-        }
+        public Task<List<CryptoResponseDto>> GetAllCryptosAsync() =>
+            // Projected in the query rather than materialising every entity first.
+            _context.CryptoCurrencies
+                .AsNoTracking()
+                .OrderBy(c => c.Symbol)
+                .Select(c => new CryptoResponseDto
+                {
+                    CryptoId = c.Id,
+                    Name = c.Name,
+                    Symbol = c.Symbol,
+                    CurrentPrice = c.CurrentPrice,
+                    TotalSupply = c.TotalSupply
+                })
+                .ToListAsync();
 
         public async Task<CryptoResponseDto> GetCryptoByIdAsync(int cryptoId)
         {
-            var crypto = await _context.CryptoCurrencies.FindAsync(cryptoId);
-            if (crypto == null)
-            {
-                throw new Exception("Cryptocurrency not found");
-            }
+            var crypto = await _context.CryptoCurrencies.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == cryptoId)
+                ?? throw NotFoundException.For("Cryptocurrency", cryptoId);
 
-            return new CryptoResponseDto
-            {
-                CryptoId = crypto.Id,
-                Name = crypto.Name,
-                Symbol = crypto.Symbol,
-                CurrentPrice = crypto.CurrentPrice,
-                TotalSupply = crypto.TotalSupply
-            };
+            return ToDto(crypto);
         }
 
         public async Task<CryptoResponseDto> CreateCryptoAsync(CryptoCreateDto cryptoDto)
         {
+            var symbol = cryptoDto.Symbol.Trim().ToUpperInvariant();
+
+            if (await _context.CryptoCurrencies.AnyAsync(c => c.Symbol == symbol))
+            {
+                throw new ConflictException($"A cryptocurrency with symbol '{symbol}' already exists.");
+            }
+
             var crypto = new CryptoCurrency
             {
-                Name = cryptoDto.Name,
-                Symbol = cryptoDto.Symbol,
+                Name = cryptoDto.Name.Trim(),
+                Symbol = symbol,
                 CurrentPrice = cryptoDto.CurrentPrice,
                 TotalSupply = cryptoDto.TotalSupply
             };
 
             _context.CryptoCurrencies.Add(crypto);
+
+            // Seed the history so charts have a starting point.
+            _context.PriceHistories.Add(new PriceHistory
+            {
+                CryptoCurrency = crypto,
+                Price = crypto.CurrentPrice,
+                Timestamp = DateTime.UtcNow
+            });
+
             await _context.SaveChangesAsync();
 
-            return new CryptoResponseDto
-            {
-                CryptoId = crypto.Id,
-                Name = crypto.Name,
-                Symbol = crypto.Symbol,
-                CurrentPrice = crypto.CurrentPrice,
-                TotalSupply = crypto.TotalSupply
-            };
+            return ToDto(crypto);
         }
 
         public async Task DeleteCryptoAsync(int cryptoId)
         {
-            var crypto = await _context.CryptoCurrencies.FindAsync(cryptoId);
-            if (crypto == null)
+            var crypto = await _context.CryptoCurrencies.FindAsync(cryptoId)
+                ?? throw NotFoundException.For("Cryptocurrency", cryptoId);
+
+            // Deleting used to cascade straight through the portfolios, wiping people's holdings
+            // without refunding anything. Refuse instead.
+            if (await _context.PortfolioItems.AnyAsync(pi => pi.CryptoId == cryptoId))
             {
-                throw new Exception("Cryptocurrency not found");
+                throw new ConflictException(
+                    $"'{crypto.Symbol}' is still held in at least one portfolio and cannot be deleted.");
+            }
+
+            if (await _context.Transactions.AnyAsync(t => t.CryptoId == cryptoId))
+            {
+                throw new ConflictException(
+                    $"'{crypto.Symbol}' has transaction history and cannot be deleted.");
             }
 
             _context.CryptoCurrencies.Remove(crypto);
@@ -97,46 +106,70 @@ namespace Crypto_Simulation.Services
 
         public async Task<CryptoResponseDto> UpdateCryptoPriceAsync(CryptoPriceUpdateDto priceUpdateDto)
         {
-            var crypto = await _context.CryptoCurrencies.FindAsync(priceUpdateDto.CryptoId);
-            if (crypto == null)
+            if (priceUpdateDto.NewPrice <= 0)
             {
-                throw new Exception("Cryptocurrency not found");
+                throw new ValidationException("The price must be greater than zero.");
             }
+
+            var crypto = await _context.CryptoCurrencies.FindAsync(priceUpdateDto.CryptoId)
+                ?? throw NotFoundException.For("Cryptocurrency", priceUpdateDto.CryptoId);
 
             crypto.CurrentPrice = priceUpdateDto.NewPrice;
 
-            var priceHistory = new PriceHistory
+            _context.PriceHistories.Add(new PriceHistory
             {
                 CryptoId = crypto.Id,
                 Price = priceUpdateDto.NewPrice,
-                Timestamp = DateTime.Now
-            };
+                Timestamp = DateTime.UtcNow
+            });
 
-            _context.PriceHistories.Add(priceHistory);
             await _context.SaveChangesAsync();
 
-            return new CryptoResponseDto
-            {
-                CryptoId = crypto.Id,
-                Name = crypto.Name,
-                Symbol = crypto.Symbol,
-                CurrentPrice = crypto.CurrentPrice,
-                TotalSupply = crypto.TotalSupply
-            };
+            return ToDto(crypto);
         }
 
-        public async Task<List<PriceHistory>> GetPriceHistoryAsync(int cryptoId)
+        public async Task<List<PriceHistoryDto>> GetPriceHistoryAsync(int cryptoId, PriceHistoryQueryDto query)
         {
-            var crypto = await _context.CryptoCurrencies.FindAsync(cryptoId);
-            if (crypto == null)
+            if (!await _context.CryptoCurrencies.AnyAsync(c => c.Id == cryptoId))
             {
-                throw new Exception("Cryptocurrency not found");
+                throw NotFoundException.For("Cryptocurrency", cryptoId);
             }
 
-            return await _context.PriceHistories
-                .Where(ph => ph.CryptoId == cryptoId)
-                .OrderBy(ph => ph.Timestamp)
+            var history = _context.PriceHistories.AsNoTracking().Where(ph => ph.CryptoId == cryptoId);
+
+            if (query.FromUtc.HasValue)
+            {
+                history = history.Where(ph => ph.Timestamp >= query.FromUtc.Value);
+            }
+
+            if (query.ToUtc.HasValue)
+            {
+                history = history.Where(ph => ph.Timestamp <= query.ToUtc.Value);
+            }
+
+            // Take the most recent rows, then hand them back oldest-first for charting.
+            var rows = await history
+                .OrderByDescending(ph => ph.Timestamp)
+                .Take(query.Limit)
+                .Select(ph => new PriceHistoryDto
+                {
+                    CryptoId = ph.CryptoId,
+                    Price = ph.Price,
+                    TimestampUtc = ph.Timestamp
+                })
                 .ToListAsync();
+
+            rows.Reverse();
+            return rows;
         }
+
+        private static CryptoResponseDto ToDto(CryptoCurrency crypto) => new()
+        {
+            CryptoId = crypto.Id,
+            Name = crypto.Name,
+            Symbol = crypto.Symbol,
+            CurrentPrice = crypto.CurrentPrice,
+            TotalSupply = crypto.TotalSupply
+        };
     }
 }

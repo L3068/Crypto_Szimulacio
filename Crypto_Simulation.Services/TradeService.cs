@@ -1,298 +1,260 @@
-﻿using Crypto_Simulation.DataContext;
+using Crypto_Simulation.DataContext;
 using Crypto_Simulation.DataContext.Dtos;
 using Crypto_Simulation.DataContext.Entities;
+using Crypto_Simulation.DataContext.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Crypto_Simulation.Services
 {
     public interface ITradeService
     {
-        Task<TransactionResponseDto> BuyCryptoAsync(TradeRequestDto tradeRequest);
-        Task<TransactionResponseDto> SellCryptoAsync(TradeRequestDto tradeRequest);
-        Task<TransactionResponseDto> ConvertCryptoAsync (ConvertRequestDto convertRequest);
+        Task<TransactionResponseDto> BuyCryptoAsync(int userId, TradeRequestDto tradeRequest);
+        Task<TransactionResponseDto> SellCryptoAsync(int userId, TradeRequestDto tradeRequest);
+        Task<TransactionResponseDto> ConvertCryptoAsync(int userId, ConvertRequestDto convertRequest);
         Task<WalletResponseDto> GetPortfolioAsync(int userId);
     }
 
     public class TradeService : ITradeService
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<TradeService> _logger;
 
-        public TradeService(AppDbContext context)
+        public TradeService(AppDbContext context, ILogger<TradeService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
-        public async Task<TransactionResponseDto> BuyCryptoAsync(TradeRequestDto tradeRequest)
+        public async Task<TransactionResponseDto> BuyCryptoAsync(int userId, TradeRequestDto tradeRequest)
         {
-            if (tradeRequest.Quantity <= 0)
-            {
-                throw new Exception("Amount must be greater than zero");
-            }
+            EnsurePositive(tradeRequest.Quantity);
 
-            var wallet = await _context.Wallets
-                .Include(w => w.PortfolioItems)
-                .FirstOrDefaultAsync(w => w.UserId == tradeRequest.UserId);
-
-            if (wallet == null)
-            {
-                throw new Exception("Wallet not found");
-            }
-
-            var crypto = await _context.CryptoCurrencies.FindAsync(tradeRequest.CryptoId);
-            if (crypto == null)
-            {
-                throw new Exception("Cryptocurrency not found");
-            }
+            var wallet = await LoadWalletAsync(userId);
+            var crypto = await FindCryptoAsync(tradeRequest.CryptoId);
 
             decimal totalCost = tradeRequest.Quantity * crypto.CurrentPrice;
 
             if (wallet.Balance < totalCost)
             {
-                throw new Exception("Insufficient balance");
+                throw new ValidationException(
+                    $"Insufficient balance: the order costs {totalCost} but the wallet holds {wallet.Balance}.");
             }
 
             wallet.Balance -= totalCost;
 
-            var walletCrypto = await _context.PortfolioItems
-                .FirstOrDefaultAsync(wc => wc.WalletId == wallet.Id && wc.CryptoId == crypto.Id);
-
-            if (walletCrypto == null)
+            var item = wallet.PortfolioItems.FirstOrDefault(pi => pi.CryptoId == crypto.Id);
+            if (item is null)
             {
-                walletCrypto = new PortfolioItem
+                item = new PortfolioItem
                 {
                     WalletId = wallet.Id,
                     CryptoId = crypto.Id,
                     Quantity = tradeRequest.Quantity,
                     AveragePrice = crypto.CurrentPrice
                 };
-                _context.PortfolioItems.Add(walletCrypto);
+                _context.PortfolioItems.Add(item);
             }
             else
             {
-                decimal totalValue = (walletCrypto.Quantity * walletCrypto.AveragePrice) + totalCost;
-                walletCrypto.Quantity += tradeRequest.Quantity;
-                walletCrypto.AveragePrice = totalValue / walletCrypto.Quantity;
+                AddToPosition(item, tradeRequest.Quantity, totalCost);
             }
 
-            var transaction = new Transaction
-            {
-                UserId = tradeRequest.UserId,
-                CryptoId = tradeRequest.CryptoId,
-                Type = TransactionType.Buy,
-                Quantity = tradeRequest.Quantity,
-                PricePerUnit = crypto.CurrentPrice,
-                TotalPrice = totalCost,
-                Timestamp = DateTime.Now
-            };
+            var transaction = NewTransaction(
+                userId, crypto.Id, TransactionType.Buy,
+                tradeRequest.Quantity, crypto.CurrentPrice, totalCost);
 
             _context.Transactions.Add(transaction);
-            await _context.SaveChangesAsync();
+            await SaveWithConcurrencyCheckAsync();
 
-            return new TransactionResponseDto
-            {
-                TransactionId = transaction.Id,
-                UserId = transaction.UserId,
-                Username = (await _context.Users.FindAsync(transaction.UserId))?.Username ?? string.Empty,
-                CryptoId = transaction.CryptoId,
-                CryptoName = crypto.Name,
-                CryptoSymbol = crypto.Symbol,
-                Type = "Buy",
-                Quantity = transaction.Quantity,
-                PricePerUnit = transaction.PricePerUnit,
-                TotalPrice = transaction.TotalPrice,
-                Timestamp = transaction.Timestamp
-            };
+            _logger.LogInformation(
+                "User {UserId} bought {Quantity} {Symbol} for {Total}",
+                userId, tradeRequest.Quantity, crypto.Symbol, totalCost);
+
+            return ToDto(transaction, wallet.User.Username, crypto);
         }
 
-        public async Task<TransactionResponseDto> SellCryptoAsync(TradeRequestDto tradeRequest)
+        public async Task<TransactionResponseDto> SellCryptoAsync(int userId, TradeRequestDto tradeRequest)
         {
-            if (tradeRequest.Quantity <= 0)
+            EnsurePositive(tradeRequest.Quantity);
+
+            var wallet = await LoadWalletAsync(userId);
+            var crypto = await FindCryptoAsync(tradeRequest.CryptoId);
+
+            var item = wallet.PortfolioItems.FirstOrDefault(pi => pi.CryptoId == crypto.Id);
+            if (item is null || item.Quantity < tradeRequest.Quantity)
             {
-                throw new Exception("Amount must be greater than zero");
-            }
-
-            var wallet = await _context.Wallets
-                .Include(w => w.PortfolioItems)
-                .FirstOrDefaultAsync(w => w.UserId == tradeRequest.UserId);
-
-            if (wallet == null)
-            {
-                throw new Exception("Wallet not found");
-            }
-
-            var crypto = await _context.CryptoCurrencies.FindAsync(tradeRequest.CryptoId);
-            if (crypto == null)
-            {
-                throw new Exception("Cryptocurrency not found");
-            }
-
-            var walletCrypto = await _context.PortfolioItems
-                .FirstOrDefaultAsync(wc => wc.WalletId == wallet.Id && wc.CryptoId == crypto.Id);
-
-            if (walletCrypto == null || walletCrypto.Quantity < tradeRequest.Quantity)
-            {
-                throw new Exception("Insufficient cryptocurrency amount");
+                throw new ValidationException(
+                    $"Insufficient {crypto.Symbol}: tried to sell {tradeRequest.Quantity} but only {item?.Quantity ?? 0} is held.");
             }
 
             decimal totalSale = tradeRequest.Quantity * crypto.CurrentPrice;
 
             wallet.Balance += totalSale;
+            RemoveFromPosition(item, tradeRequest.Quantity);
 
-            walletCrypto.Quantity -= tradeRequest.Quantity;
-
-            if (walletCrypto.Quantity == 0)
-            {
-                _context.PortfolioItems.Remove(walletCrypto);
-            }
-
-            var transaction = new Transaction
-            {
-                UserId = tradeRequest.UserId,
-                CryptoId = tradeRequest.CryptoId,
-                Type = TransactionType.Sell,
-                Quantity = tradeRequest.Quantity,
-                PricePerUnit = crypto.CurrentPrice,
-                TotalPrice = totalSale,
-                Timestamp = DateTime.Now
-            };
+            var transaction = NewTransaction(
+                userId, crypto.Id, TransactionType.Sell,
+                tradeRequest.Quantity, crypto.CurrentPrice, totalSale);
 
             _context.Transactions.Add(transaction);
-            await _context.SaveChangesAsync();
+            await SaveWithConcurrencyCheckAsync();
 
-            return new TransactionResponseDto
-            {
-                TransactionId = transaction.Id,
-                UserId = transaction.UserId,
-                Username = (await _context.Users.FindAsync(transaction.UserId))?.Username ?? string.Empty,
-                CryptoId = transaction.CryptoId,
-                CryptoName = crypto.Name,
-                CryptoSymbol = crypto.Symbol,
-                Type = "Sell",
-                Quantity = transaction.Quantity,
-                PricePerUnit = transaction.PricePerUnit,
-                TotalPrice = transaction.TotalPrice,
-                Timestamp = transaction.Timestamp
-            };
+            _logger.LogInformation(
+                "User {UserId} sold {Quantity} {Symbol} for {Total}",
+                userId, tradeRequest.Quantity, crypto.Symbol, totalSale);
+
+            return ToDto(transaction, wallet.User.Username, crypto);
         }
 
-        public async Task<TransactionResponseDto> ConvertCryptoAsync(ConvertRequestDto convertRequest)
+        public async Task<TransactionResponseDto> ConvertCryptoAsync(int userId, ConvertRequestDto convertRequest)
         {
-            if (convertRequest.Quantity <= 0)
-                throw new Exception("Amount must be greater than zero");
+            EnsurePositive(convertRequest.Quantity);
 
-            var wallet = await _context.Wallets
-                .Include(w => w.PortfolioItems)
-                .FirstOrDefaultAsync(w => w.UserId == convertRequest.UserId);
+            if (convertRequest.CryptoId == convertRequest.TargetCryptoId)
+            {
+                throw new ValidationException("The source and target cryptocurrency must differ.");
+            }
 
-            if (wallet == null)
-                throw new Exception("Wallet not found");
+            var wallet = await LoadWalletAsync(userId);
+            var sourceCrypto = await FindCryptoAsync(convertRequest.CryptoId);
+            var targetCrypto = await FindCryptoAsync(convertRequest.TargetCryptoId);
 
-            var sourceCrypto = await _context.CryptoCurrencies.FindAsync(convertRequest.CryptoId);
-            var targetCrypto = await _context.CryptoCurrencies.FindAsync(convertRequest.TargetCryptoId);
-
-            if (sourceCrypto == null || targetCrypto == null)
-                throw new Exception("One or both cryptocurrencies not found");
-
-            var sourcePortfolioItem = wallet.PortfolioItems
-                .FirstOrDefault(p => p.CryptoId == sourceCrypto.Id);
-
-            if (sourcePortfolioItem == null || sourcePortfolioItem.Quantity < convertRequest.Quantity)
-                throw new Exception("Insufficient source cryptocurrency");
+            var sourceItem = wallet.PortfolioItems.FirstOrDefault(pi => pi.CryptoId == sourceCrypto.Id);
+            if (sourceItem is null || sourceItem.Quantity < convertRequest.Quantity)
+            {
+                throw new ValidationException(
+                    $"Insufficient {sourceCrypto.Symbol}: tried to convert {convertRequest.Quantity} but only {sourceItem?.Quantity ?? 0} is held.");
+            }
 
             decimal totalValue = convertRequest.Quantity * sourceCrypto.CurrentPrice;
             decimal targetAmount = totalValue / targetCrypto.CurrentPrice;
 
-            sourcePortfolioItem.Quantity -= convertRequest.Quantity;
-            if (sourcePortfolioItem.Quantity == 0)
-                _context.PortfolioItems.Remove(sourcePortfolioItem);
+            RemoveFromPosition(sourceItem, convertRequest.Quantity);
 
-            var targetPortfolioItem = wallet.PortfolioItems
-                .FirstOrDefault(p => p.CryptoId == targetCrypto.Id);
-
-            if (targetPortfolioItem == null)
+            var targetItem = wallet.PortfolioItems.FirstOrDefault(pi => pi.CryptoId == targetCrypto.Id);
+            if (targetItem is null)
             {
-                targetPortfolioItem = new PortfolioItem
+                targetItem = new PortfolioItem
                 {
                     WalletId = wallet.Id,
                     CryptoId = targetCrypto.Id,
-                    Quantity = targetAmount
+                    Quantity = targetAmount,
+                    // Previously left at 0, which made the whole position look like pure profit.
+                    AveragePrice = targetCrypto.CurrentPrice
                 };
-                _context.PortfolioItems.Add(targetPortfolioItem);
+                _context.PortfolioItems.Add(targetItem);
             }
             else
             {
-                targetPortfolioItem.Quantity += targetAmount;
+                AddToPosition(targetItem, targetAmount, totalValue);
             }
 
-            var transaction = new Transaction
-            {
-                UserId = wallet.UserId,
-                CryptoId = targetCrypto.Id,
-                Type = TransactionType.Buy,
-                Quantity = targetAmount,
-                PricePerUnit = targetCrypto.CurrentPrice,
-                TotalPrice = totalValue,
-                Timestamp = DateTime.Now
-            };
+            var transaction = NewTransaction(
+                userId, targetCrypto.Id, TransactionType.Convert,
+                targetAmount, targetCrypto.CurrentPrice, totalValue);
+
             _context.Transactions.Add(transaction);
+            await SaveWithConcurrencyCheckAsync();
 
-            await _context.SaveChangesAsync();
+            _logger.LogInformation(
+                "User {UserId} converted {Quantity} {From} into {TargetAmount} {To}",
+                userId, convertRequest.Quantity, sourceCrypto.Symbol, targetAmount, targetCrypto.Symbol);
 
-            return new TransactionResponseDto
-            {
-                TransactionId = transaction.Id,
-                UserId = transaction.UserId,
-                Username = (await _context.Users.FindAsync(transaction.UserId))?.Username ?? string.Empty,
-                CryptoId = transaction.CryptoId,
-                CryptoName = targetCrypto.Name,
-                CryptoSymbol = targetCrypto.Symbol,
-                Type = "Convert",
-                Quantity = transaction.Quantity,
-                PricePerUnit = transaction.PricePerUnit,
-                TotalPrice = transaction.TotalPrice,
-                Timestamp = transaction.Timestamp
-            };
+            return ToDto(transaction, wallet.User.Username, targetCrypto);
         }
-
 
         public async Task<WalletResponseDto> GetPortfolioAsync(int userId)
         {
             var wallet = await _context.Wallets
+                .AsNoTracking()
                 .Include(w => w.PortfolioItems)
-                .ThenInclude(wc => wc.CryptoCurrency)
-                .FirstOrDefaultAsync(w => w.UserId == userId);
+                .ThenInclude(pi => pi.CryptoCurrency)
+                .FirstOrDefaultAsync(w => w.UserId == userId)
+                ?? throw NotFoundException.For("Wallet for user", userId);
 
-            if (wallet == null)
+            return PortfolioMapper.ToDto(wallet);
+        }
+
+        private async Task<Wallet> LoadWalletAsync(int userId) =>
+            await _context.Wallets
+                .Include(w => w.User)
+                .Include(w => w.PortfolioItems)
+                .FirstOrDefaultAsync(w => w.UserId == userId)
+            ?? throw NotFoundException.For("Wallet for user", userId);
+
+        private async Task<CryptoCurrency> FindCryptoAsync(int cryptoId) =>
+            await _context.CryptoCurrencies.FindAsync(cryptoId)
+            ?? throw NotFoundException.For("Cryptocurrency", cryptoId);
+
+        private static void EnsurePositive(decimal quantity)
+        {
+            if (quantity <= 0)
             {
-                throw new Exception("Wallet not found");
+                throw new ValidationException("Quantity must be greater than zero.");
             }
+        }
 
-            var walletDto = new WalletResponseDto
+        /// <summary>Adds units to a position and rolls the volume weighted average price forward.</summary>
+        private static void AddToPosition(PortfolioItem item, decimal quantity, decimal cost)
+        {
+            decimal previousCost = item.Quantity * item.AveragePrice;
+            item.Quantity += quantity;
+            item.AveragePrice = item.Quantity > 0 ? (previousCost + cost) / item.Quantity : 0;
+        }
+
+        /// <summary>
+        /// Removes units from a position. The average price is deliberately unchanged: selling part
+        /// of a holding realises profit but does not alter what the remaining units cost.
+        /// </summary>
+        private void RemoveFromPosition(PortfolioItem item, decimal quantity)
+        {
+            item.Quantity -= quantity;
+            if (item.Quantity <= 0)
             {
-                WalletId = wallet.Id,
-                UserId = wallet.UserId,
-                Balance = wallet.Balance,
-                Cryptos = wallet.PortfolioItems.Select(wc => new WalletCryptoDto
-                {
-                    CryptoId = wc.CryptoId,
-                    Name = wc.CryptoCurrency.Name,
-                    Symbol = wc.CryptoCurrency.Symbol,
-                    Amount = wc.Quantity,
-                    AverageBuyPrice = wc.AveragePrice,
-                    CurrentPrice = wc.CryptoCurrency.CurrentPrice,
-                    CurrentValue = wc.Quantity * wc.CryptoCurrency.CurrentPrice,
-                    ProfitLoss = wc.Quantity * (wc.CryptoCurrency.CurrentPrice - wc.AveragePrice),
-                    ProfitLossPercentage = wc.AveragePrice > 0 ?
-                        ((wc.CryptoCurrency.CurrentPrice - wc.AveragePrice) / wc.AveragePrice) * 100 : 0
-                }).ToList()
+                _context.PortfolioItems.Remove(item);
+            }
+        }
+
+        private static Transaction NewTransaction(
+            int userId, int cryptoId, TransactionType type,
+            decimal quantity, decimal pricePerUnit, decimal totalPrice) => new()
+            {
+                UserId = userId,
+                CryptoId = cryptoId,
+                Type = type,
+                Quantity = quantity,
+                PricePerUnit = pricePerUnit,
+                TotalPrice = totalPrice,
+                Timestamp = DateTime.UtcNow
             };
 
-            return walletDto;
+        private async Task SaveWithConcurrencyCheckAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ConflictException(
+                    "The wallet was modified by another request. Please retry the operation.");
+            }
         }
+
+        private static TransactionResponseDto ToDto(Transaction transaction, string username, CryptoCurrency crypto) => new()
+        {
+            TransactionId = transaction.Id,
+            UserId = transaction.UserId,
+            Username = username,
+            CryptoId = transaction.CryptoId,
+            CryptoName = crypto.Name,
+            CryptoSymbol = crypto.Symbol,
+            Type = transaction.Type.ToString(),
+            Quantity = transaction.Quantity,
+            PricePerUnit = transaction.PricePerUnit,
+            TotalPrice = transaction.TotalPrice,
+            TimestampUtc = transaction.Timestamp
+        };
     }
 }

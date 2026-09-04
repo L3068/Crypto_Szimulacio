@@ -1,87 +1,127 @@
-﻿using Crypto_Simulation.DataContext;
+using Crypto_Simulation.DataContext;
 using Crypto_Simulation.DataContext.Entities;
+using Crypto_Simulation.Services.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Crypto_Simulation.Services
 {
+    /// <summary>
+    /// Nudges every price by a small random amount on a fixed interval and records the result.
+    /// </summary>
     public class PriceUpdateService : BackgroundService
     {
+        private const decimal MinimumPrice = 0.000001M;
+
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<PriceUpdateService> _logger;
-        private readonly Random _random = new Random();
-        private readonly TimeSpan _interval = TimeSpan.FromSeconds(30);
+        private readonly SimulationOptions _options;
 
         public PriceUpdateService(
             IServiceProvider serviceProvider,
-            ILogger<PriceUpdateService> logger)
+            ILogger<PriceUpdateService> logger,
+            IOptions<SimulationOptions> options)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
+            _options = options.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Price Update Service is starting.");
+            var interval = TimeSpan.FromSeconds(_options.PriceUpdateIntervalSeconds);
+            _logger.LogInformation("Price update service started, interval {Interval}.", interval);
+
+            using var timer = new PeriodicTimer(interval);
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Price Update Service is running at: {time}", DateTimeOffset.Now);
-
                 try
                 {
-                    await UpdatePricesAsync();
+                    await UpdatePricesAsync(stoppingToken);
+                }
+                catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+                {
+                    break;
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error occurred updating prices.");
+                    // Keep the loop alive; a transient database error should not kill the job.
+                    _logger.LogError(ex, "Price update failed.");
                 }
 
-                await Task.Delay(_interval, stoppingToken);
+                try
+                {
+                    if (!await timer.WaitForNextTickAsync(stoppingToken))
+                    {
+                        break;
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
             }
 
-            _logger.LogInformation("Price Update Service is stopping.");
+            _logger.LogInformation("Price update service stopped.");
         }
 
-        private async Task UpdatePricesAsync()
+        private async Task UpdatePricesAsync(CancellationToken cancellationToken)
         {
-            using (var scope = _serviceProvider.CreateScope())
+            using var scope = _serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            var cryptos = await context.CryptoCurrencies.ToListAsync(cancellationToken);
+            if (cryptos.Count == 0)
             {
-                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                return;
+            }
 
-                var cryptos = await context.CryptoCurrencies.ToListAsync();
+            var now = DateTime.UtcNow;
 
-                foreach (var crypto in cryptos)
+            foreach (var crypto in cryptos)
+            {
+                // Random.Shared is thread safe; the old private Random instance was not.
+                double swing = (Random.Shared.NextDouble() * 2 - 1) * _options.MaxPriceFluctuation;
+                decimal newPrice = crypto.CurrentPrice * (1 + (decimal)swing);
+
+                // Round to 8 decimals rather than 2, so sub-cent coins do not collapse to zero.
+                newPrice = Math.Max(MinimumPrice, Math.Round(newPrice, 8));
+
+                crypto.CurrentPrice = newPrice;
+
+                context.PriceHistories.Add(new PriceHistory
                 {
-                    decimal fluctuation = (decimal)(_random.NextDouble() * 0.06 - 0.03);
+                    CryptoId = crypto.Id,
+                    Price = newPrice,
+                    Timestamp = now
+                });
+            }
 
-                    decimal newPrice = crypto.CurrentPrice * (1 + fluctuation);
+            await context.SaveChangesAsync(cancellationToken);
+            await PruneHistoryAsync(context, now, cancellationToken);
 
-                    newPrice = Math.Max(0.01M, newPrice);
+            _logger.LogDebug("Updated prices for {Count} cryptocurrencies.", cryptos.Count);
+        }
 
-                    newPrice = Math.Round(newPrice, 2);
+        private async Task PruneHistoryAsync(AppDbContext context, DateTime now, CancellationToken cancellationToken)
+        {
+            if (_options.PriceHistoryRetentionDays <= 0)
+            {
+                return;
+            }
 
-                    crypto.CurrentPrice = newPrice;
+            var cutoff = now.AddDays(-_options.PriceHistoryRetentionDays);
+            int removed = await context.PriceHistories
+                .Where(ph => ph.Timestamp < cutoff)
+                .ExecuteDeleteAsync(cancellationToken);
 
-                    var priceHistory = new PriceHistory
-                    {
-                        CryptoId = crypto.Id,
-                        Price = newPrice,
-                        Timestamp = DateTime.Now
-                    };
-
-                    context.PriceHistories.Add(priceHistory);
-                }
-
-                await context.SaveChangesAsync();
-                _logger.LogInformation("Updated prices for {count} cryptocurrencies", cryptos.Count);
+            if (removed > 0)
+            {
+                _logger.LogInformation("Pruned {Count} price history rows older than {Cutoff}.", removed, cutoff);
             }
         }
     }
