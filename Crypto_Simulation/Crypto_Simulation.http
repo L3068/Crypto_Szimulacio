@@ -1,6 +1,96 @@
-@Crypto_Simulation_HostAddress = http://localhost:5221
+@host = http://localhost:5221
+@email = alice@example.com
+@password = Demo1234!
 
-GET {{Crypto_Simulation_HostAddress}}/weatherforecast/
+### Register a new account (returns 201 with the created user)
+POST {{host}}/api/users/register
+Content-Type: application/json
+
+{
+  "username": "newtrader",
+  "email": "newtrader@example.com",
+  "password": "correct horse battery"
+}
+
+### Sign in and capture the bearer token
+# @name login
+POST {{host}}/api/users/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+@token = {{login.response.body.token}}
+
+### Market data (public, no token needed)
+GET {{host}}/api/cryptos
 Accept: application/json
 
-###
+### Price history for Bitcoin, most recent 50 points
+GET {{host}}/api/cryptos/price/history/1?limit=50
+Accept: application/json
+
+### Who am I
+GET {{host}}/api/users/me
+Authorization: Bearer {{token}}
+
+### Buy 0.25 BTC
+POST {{host}}/api/trade/buy
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cryptoId": 1,
+  "quantity": 0.25
+}
+
+### Sell 0.1 BTC
+POST {{host}}/api/trade/sell
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cryptoId": 1,
+  "quantity": 0.1
+}
+
+### Convert 0.05 BTC into ETH
+POST {{host}}/api/trade/convert
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cryptoId": 1,
+  "targetCryptoId": 2,
+  "quantity": 0.05
+}
+
+### Own portfolio
+GET {{host}}/api/trade/portfolio
+Authorization: Bearer {{token}}
+
+### Own transaction history (paged)
+GET {{host}}/api/transactions/1?skip=0&take=20
+Authorization: Bearer {{token}}
+
+### Aggregate profit and loss
+GET {{host}}/api/profit/1
+Authorization: Bearer {{token}}
+
+### Per-position profit and loss
+GET {{host}}/api/profit/details/1
+Authorization: Bearer {{token}}
+
+### Add a currency (admin only)
+POST {{host}}/api/cryptos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Testcoin",
+  "symbol": "TEST",
+  "currentPrice": 1.5,
+  "totalSupply": 1000000
+}
