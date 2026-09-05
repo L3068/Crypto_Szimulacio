@@ -79,7 +79,7 @@ mozgatja véletlenszerűen.
 | Kulcs | Leírás | Alapérték |
 | --- | --- | --- |
 | `ConnectionStrings:DatabaseConnection` | SQL Server connection string (kötelező) | – |
-| `Jwt:Key` | Szimmetrikus aláíró kulcs, legalább 32 karakter (kötelező) | – |
+| `Jwt:Key` | Szimmetrikus aláíró kulcs, legalább 32 karakter | Development-ben generált |
 | `Jwt:Issuer` / `Jwt:Audience` | Token kibocsátó és célközönség | `Crypto_Simulation` |
 | `Jwt:ExpiryMinutes` | Token élettartama percben | `60` |
 | `Simulation:StartingBalance` | Új fiók kezdő egyenlege | `10000` |
@@ -88,9 +88,18 @@ mozgatja véletlenszerűen.
 | `Simulation:PriceHistoryRetentionDays` | Ennél régebbi árelőzmények törlődnek (0 = megtartás) | `30` |
 | `Cors:AllowedOrigins` | Engedélyezett frontend originök tömbje | üres |
 
-> **Az `appsettings.Development.json` fájlban lévő JWT kulcs kizárólag helyi fejlesztésre való.**
-> Éles környezetben add meg a `Jwt__Key` környezeti változóval, user-secrets-szel vagy key vaulttal.
-> Az alkalmazás indításkor elszáll, ha a kulcs hiányzik vagy 32 karakternél rövidebb.
+> **A repo szándékosan nem tartalmaz JWT aláíró kulcsot.** Fejlesztői módban az alkalmazás
+> induláskor generál magának egy véletlenszerűt, így egy friss klón mindenféle beállítás nélkül
+> elindul. Cserébe minden újraindítás után újra be kell jelentkezned, mert a korábban kiadott
+> tokenek érvénytelenné válnak. Ha ezt el akarod kerülni, adj meg egy sajátot:
+>
+> ```bash
+> dotnet user-secrets --project Crypto_Simulation set "Jwt:Key" "<legalább 32 karakter>"
+> ```
+>
+> Minden más környezetben a kulcs megadása kötelező — `Jwt__Key` környezeti változóval,
+> user-secrets-szel vagy key vaulttal. Az alkalmazás indításkor elszáll, ha hiányzik vagy
+> 32 karakternél rövidebb.
 
 ## Authentikáció
 

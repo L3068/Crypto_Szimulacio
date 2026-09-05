@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using Crypto_Simulation.DataContext;
 using Crypto_Simulation.DataContext.Entities;
@@ -16,6 +17,23 @@ var builder = WebApplication.CreateBuilder(args);
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
+
+// No signing key is committed to source control. During local development one is
+// generated on the spot so a fresh clone runs without setup; every other environment
+// must supply Jwt:Key itself, and startup fails loudly if it does not.
+var jwtKeyPath = $"{JwtOptions.SectionName}:{nameof(JwtOptions.Key)}";
+bool usingGeneratedJwtKey = false;
+
+if (builder.Environment.IsDevelopment() && string.IsNullOrWhiteSpace(builder.Configuration[jwtKeyPath]))
+{
+    builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
+    {
+        [jwtKeyPath] = Convert.ToBase64String(RandomNumberGenerator.GetBytes(48))
+    });
+
+    usingGeneratedJwtKey = true;
+}
+
 builder.Services.AddOptions<JwtOptions>()
     .Bind(builder.Configuration.GetSection(JwtOptions.SectionName))
     .ValidateDataAnnotations()
@@ -142,6 +160,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+if (usingGeneratedJwtKey)
+{
+    app.Logger.LogWarning(
+        "No {KeyPath} was configured, so a random development key was generated. Tokens issued " +
+        "now stop working when the app restarts. Set {KeyPath} with user-secrets to keep them stable.",
+        jwtKeyPath, jwtKeyPath);
+}
 
 app.UseExceptionHandler();
 
