@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Crypto_Simulation.DataContext.Dtos
 {
     public class TransactionResponseDto
@@ -18,6 +12,6 @@ namespace Crypto_Simulation.DataContext.Dtos
         public decimal Quantity { get; set; }
         public decimal PricePerUnit { get; set; }
         public decimal TotalPrice { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime TimestampUtc { get; set; }
     }
 }

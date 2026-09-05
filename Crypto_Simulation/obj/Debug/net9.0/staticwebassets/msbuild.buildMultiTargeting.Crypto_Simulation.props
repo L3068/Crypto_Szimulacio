@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Crypto_Simulation.props" />
-</Project>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crypto_Simulation.DataContext.Dtos
 {
@@ -11,7 +7,7 @@ namespace Crypto_Simulation.DataContext.Dtos
         public int WalletId { get; set; }
         public int UserId { get; set; }
         public decimal Balance { get; set; }
-        public List<WalletCryptoDto> Cryptos { get; set; } = new List<WalletCryptoDto>();
+        public List<WalletCryptoDto> Cryptos { get; set; } = new();
     }
 
     public class WalletCryptoDto
@@ -29,6 +25,9 @@ namespace Crypto_Simulation.DataContext.Dtos
 
     public class WalletUpdateDto
     {
+        [Required]
+        [Range(typeof(decimal), DecimalRanges.ZeroMoney, DecimalRanges.LargestMoney,
+            ErrorMessage = "The balance cannot be negative.")]
         public decimal Balance { get; set; }
     }
 }

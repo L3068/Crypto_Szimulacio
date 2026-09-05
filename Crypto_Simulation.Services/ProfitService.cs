@@ -1,11 +1,8 @@
-﻿using Crypto_Simulation.DataContext;
+using Crypto_Simulation.DataContext;
 using Crypto_Simulation.DataContext.Dtos;
+using Crypto_Simulation.DataContext.Entities;
+using Crypto_Simulation.DataContext.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crypto_Simulation.Services
 {
@@ -26,28 +23,11 @@ namespace Crypto_Simulation.Services
 
         public async Task<ProfitResponseDto> CalculateProfitAsync(int userId)
         {
-            var wallet = await _context.Wallets
-                .Include(w => w.PortfolioItems)
-                .ThenInclude(wc => wc.CryptoCurrency)
-                .FirstOrDefaultAsync(w => w.UserId == userId);
+            var items = await LoadPositionsAsync(userId);
 
-            if (wallet == null)
-            {
-                throw new Exception("Wallet not found");
-            }
-
-            decimal totalInvestment = 0;
-            decimal totalValue = 0;
-
-            foreach (var wc in wallet.PortfolioItems)
-            {
-                totalInvestment += wc.Quantity * wc.AveragePrice;
-                totalValue += wc.Quantity * wc.CryptoCurrency.CurrentPrice;
-            }
-
+            decimal totalInvestment = items.Sum(i => i.Quantity * i.AveragePrice);
+            decimal totalValue = items.Sum(i => i.Quantity * i.CryptoCurrency.CurrentPrice);
             decimal totalProfitLoss = totalValue - totalInvestment;
-            decimal totalProfitLossPercentage = totalInvestment > 0 ?
-                (totalProfitLoss / totalInvestment) * 100 : 0;
 
             return new ProfitResponseDto
             {
@@ -55,56 +35,55 @@ namespace Crypto_Simulation.Services
                 TotalInvestment = totalInvestment,
                 TotalValue = totalValue,
                 TotalProfitLoss = totalProfitLoss,
-                TotalProfitLossPercentage = totalProfitLossPercentage
+                TotalProfitLossPercentage = totalInvestment > 0
+                    ? (totalProfitLoss / totalInvestment) * 100
+                    : 0
             };
         }
 
         public async Task<ProfitDetailResponseDto> CalculateDetailedProfitAsync(int userId)
         {
-            var wallet = await _context.Wallets
-                .Include(w => w.PortfolioItems)
-                .ThenInclude(wc => wc.CryptoCurrency)
-                .FirstOrDefaultAsync(w => w.UserId == userId);
+            var items = await LoadPositionsAsync(userId);
 
-            if (wallet == null)
+            var details = items.Select(item =>
             {
-                throw new Exception("Wallet not found");
-            }
-
-            var details = new List<CryptoProfitDto>();
-            decimal totalProfitLoss = 0;
-
-            foreach (var wc in wallet.PortfolioItems)
-            {
-                decimal investment = wc.Quantity * wc.AveragePrice;
-                decimal currentValue = wc.Quantity * wc.CryptoCurrency.CurrentPrice;
+                decimal investment = item.Quantity * item.AveragePrice;
+                decimal currentValue = item.Quantity * item.CryptoCurrency.CurrentPrice;
                 decimal profitLoss = currentValue - investment;
-                decimal profitLossPercentage = investment > 0 ?
-                    (profitLoss / investment) * 100 : 0;
 
-                details.Add(new CryptoProfitDto
+                return new CryptoProfitDto
                 {
-                    CryptoId = wc.CryptoId,
-                    Name = wc.CryptoCurrency.Name,
-                    Symbol = wc.CryptoCurrency.Symbol,
-                    Amount = wc.Quantity,
-                    AverageBuyPrice = wc.AveragePrice,
-                    CurrentPrice = wc.CryptoCurrency.CurrentPrice,
+                    CryptoId = item.CryptoId,
+                    Name = item.CryptoCurrency.Name,
+                    Symbol = item.CryptoCurrency.Symbol,
+                    Amount = item.Quantity,
+                    AverageBuyPrice = item.AveragePrice,
+                    CurrentPrice = item.CryptoCurrency.CurrentPrice,
                     Investment = investment,
                     CurrentValue = currentValue,
                     ProfitLoss = profitLoss,
-                    ProfitLossPercentage = profitLossPercentage
-                });
-
-                totalProfitLoss += profitLoss;
-            }
+                    ProfitLossPercentage = investment > 0 ? (profitLoss / investment) * 100 : 0
+                };
+            }).ToList();
 
             return new ProfitDetailResponseDto
             {
                 UserId = userId,
                 Details = details,
-                TotalProfitLoss = totalProfitLoss
+                TotalProfitLoss = details.Sum(d => d.ProfitLoss)
             };
+        }
+
+        private async Task<List<PortfolioItem>> LoadPositionsAsync(int userId)
+        {
+            var wallet = await _context.Wallets
+                .AsNoTracking()
+                .Include(w => w.PortfolioItems)
+                .ThenInclude(pi => pi.CryptoCurrency)
+                .FirstOrDefaultAsync(w => w.UserId == userId)
+                ?? throw NotFoundException.For("Wallet for user", userId);
+
+            return wallet.PortfolioItems;
         }
     }
 }

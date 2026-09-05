@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore Crypto_Simulation.sln
+
+      - name: Build
+        run: dotnet build Crypto_Simulation.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test Crypto_Simulation.sln --configuration Release --no-build --verbosity normal
