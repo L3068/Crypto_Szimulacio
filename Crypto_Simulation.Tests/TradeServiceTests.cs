@@ -51,6 +51,7 @@ namespace Crypto_Simulation.Tests
 
         [Fact]
         public async Task Buy_RollsAveragePriceForwardAcrossPurchases()
+        {
             await using var context = await TestContextFactory.CreateSeededContextAsync(startingBalance: 100_000M);
             var trade = TestContextFactory.CreateTradeService(context);
 
