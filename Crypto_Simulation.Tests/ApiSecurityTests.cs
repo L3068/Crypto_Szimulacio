@@ -189,7 +189,7 @@ namespace Crypto_Simulation.Tests
         }
 
         [Fact]
-        public async Task RegistrationRejectsANonPositiveTradeQuantity()
+        public async Task TradingRejectsANonPositiveTradeQuantity()
         {
             var client = await _factory.CreateSeededClientAsync();
 
